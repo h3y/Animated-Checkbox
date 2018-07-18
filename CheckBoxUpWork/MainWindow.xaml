@@ -8,6 +8,22 @@
         Title="MainWindow" Height="450" Width="800">
     <Window.Resources>
         <Style TargetType="CheckBox">
+            <Style.Resources>
+                <Style TargetType="TextBlock">
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type CheckBox}}, Path=IsChecked}" Value="{x:Null}">
+                            <Setter Property="Foreground" Value="#d00e0e"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type CheckBox}}, Path=IsChecked}" Value="true">
+                            <Setter Property="Foreground" Value="#000"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type CheckBox}}, Path=IsChecked}" Value="false">
+                            <Setter Property="TextDecorations" Value="Strikethrough"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Style.Resources>
+            <Setter Property="IsThreeState" Value="True"/>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="CheckBox">
@@ -36,6 +52,7 @@
                         </Grid>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="true">
+                                <Setter Property="IsThreeState" Value="False"/>
                                 <Trigger.EnterActions>
                                     <BeginStoryboard>
                                         <Storyboard Timeline.DesiredFrameRate="60" >
@@ -64,10 +81,9 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
-
-        <CheckBox Grid.Row="1" IsThreeState="False" VerticalAlignment="Top" Padding="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="5" 
-                  Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked">
-            <TextBlock Text="Email blablabla" FontSize="18"  />
+        <CheckBox Grid.Row="1" VerticalAlignment="Top" IsChecked="{x:Null}" IsThreeState="False" Padding="5,0,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Left" Margin="5" 
+                  Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked" Indeterminate="CheckBox_Indeterminate" Loaded="CheckBox_Loaded" >
+            <TextBlock Text="joe@gmail.net" FontSize="18"/>
         </CheckBox>
     </Grid>
 </Window>

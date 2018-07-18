@@ -34,5 +34,17 @@ namespace CheckBoxUpWork
 		{
 			Console.WriteLine("CheckBox is unchecked");
 		}
+
+		private void CheckBox_Indeterminate(object sender, RoutedEventArgs e)
+		{
+			Console.WriteLine("CheckBox is Indeterminate");
+		}
+
+		private void CheckBox_Loaded(object sender, RoutedEventArgs e)
+		{
+			if((sender as CheckBox).IsChecked == null)
+				Console.WriteLine("CheckBox is Indeterminate");
+
+		}
 	}
 }
